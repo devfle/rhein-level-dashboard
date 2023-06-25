@@ -12,7 +12,7 @@ import java.util.List;
 @ViewScoped
 public class RheinLevelController implements Serializable {
 
-    public List<RheinLevelData> getRheinLevelData() throws URISyntaxException, IOException, InterruptedException {
+    public static List<RheinLevelData> getRheinLevelData() throws URISyntaxException, IOException, InterruptedException {
         return RheinLevel.getInstance().getRheinLevel();
     }
 }

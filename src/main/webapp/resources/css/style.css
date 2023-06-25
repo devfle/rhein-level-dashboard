@@ -1,0 +1,13 @@
+.ui-menu.ui-widget {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.ui-menu-list {
+    display: flex;
+    text-align: center;
+}
+
+.ui-card-body {
+    margin-block-start: 24px;
+}

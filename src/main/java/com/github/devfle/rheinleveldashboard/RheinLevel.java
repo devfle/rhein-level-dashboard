@@ -17,7 +17,6 @@ import java.util.List;
 @Named
 @ViewScoped
 public class RheinLevel implements Serializable {
-
     private final Gson gson;
     private final HttpClient client;
     public static RheinLevel instance = null;

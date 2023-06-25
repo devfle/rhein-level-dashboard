@@ -3,16 +3,21 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <f:view>
-    <p:menu>
-        <p:menuitem value="Home" url="#" />
-        <p:menuitem value="Settings" url="#" />
-    </p:menu>
-    <p:card></p:card>
-    <h:outputLabel value="#{rheinLevelController.rheinLevelData[0].value}"/>
-    <h:outputLabel value="#{rheinLevelController.rheinLevelData[0].timestamp}"/>
+    <h:head>
+        <title>Rhein Level Dashboard</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+        <p:menu>
+            <p:menuitem value="Home" url="#" />
+            <p:menuitem value="Settings" url="#" />
+        </p:menu>
+        <p:card>
+            <p:lineChart model="#{rheinLevelChart.lineModel}" />
+        </p:card>
+    </h:body>
 </f:view>
 </html>
