@@ -7,7 +7,6 @@ import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.line.LineChartDataSet;
 import org.primefaces.model.charts.line.LineChartModel;
 import org.primefaces.model.charts.line.LineChartOptions;
-import org.primefaces.model.charts.optionconfig.title.Title;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -27,11 +26,9 @@ public class RheinLevelChart implements Serializable {
         lineModel = new LineChartModel();
         ChartData data = new ChartData();
 
-        LineChartDataSet dataSet = new LineChartDataSet();
-        List<Object> chartValues = new ArrayList<>();
-
-        List<RheinLevelData> rheinLevelData = null;
+        List<List<RheinLevelData>> rheinLevelData;
         List<String> labels = new ArrayList<>();
+        List<String> colorCodes = List.of("#002A40", "#00547F", "#007FBF", "#1BB8FA");
 
         try {
             rheinLevelData = RheinLevelController.getRheinLevelData();
@@ -39,36 +36,48 @@ public class RheinLevelChart implements Serializable {
             throw new RuntimeException(e);
         }
 
-        for (RheinLevelData rheinData : rheinLevelData) {
-            String rheinLevelTimeStamp = rheinData.getTimestamp();
-            OffsetDateTime parsedTimeStamp = OffsetDateTime.parse(rheinLevelTimeStamp);
-            LocalDateTime localDateTime = parsedTimeStamp.toLocalDateTime();
+        boolean allowLabel = true;
+        byte index = 0;
+        for (List<RheinLevelData> rheinDataList : rheinLevelData) {
 
-            if (0 != localDateTime.getMinute()) {
-                continue;
+            LineChartDataSet dataSet = new LineChartDataSet();
+            List<Object> chartValues = new ArrayList<>();
+
+            for (RheinLevelData rheinData : rheinDataList) {
+                String rheinLevelTimeStamp = rheinData.getTimestamp();
+                OffsetDateTime parsedTimeStamp = OffsetDateTime.parse(rheinLevelTimeStamp);
+                LocalDateTime localDateTime = parsedTimeStamp.toLocalDateTime();
+
+                if (0 != localDateTime.getMinute()) {
+                    continue;
+                }
+
+                chartValues.add(rheinData.getValue());
+
+                if (!allowLabel) {
+                    continue;
+                }
+
+                labels.add(String.format("%02d:00" ,localDateTime.getHour()));
             }
 
-            chartValues.add(rheinData.getValue());
-            labels.add(String.format("%02d:00" ,localDateTime.getHour()));
+            // after first iteration disable label adding new values
+            allowLabel = false;
+
+            dataSet.setBorderColor(colorCodes.get(index));
+            dataSet.setBackgroundColor(colorCodes.get(index));
+
+            dataSet.setData(chartValues);
+            dataSet.setLabel(rheinDataList.get(0).getStationName().toUpperCase());
+            data.addChartDataSet(dataSet);
+            data.setLabels(labels);
+
+            LineChartOptions options = new LineChartOptions();
+
+            lineModel.setOptions(options);
+            lineModel.setData(data);
+            index++;
         }
-
-        dataSet.setData(chartValues);
-        dataSet.setFill(true);
-        dataSet.setLabel("Cologne");
-        dataSet.setBorderColor("rgb(75, 192, 192)");
-        dataSet.setTension(0.1);
-        data.addChartDataSet(dataSet);
-
-        data.setLabels(labels);
-
-        LineChartOptions options = new LineChartOptions();
-        Title title = new Title();
-        title.setDisplay(true);
-        title.setText("Rhein Level");
-        options.setTitle(title);
-
-        lineModel.setOptions(options);
-        lineModel.setData(data);
     }
 
     public LineChartModel getLineModel() {
