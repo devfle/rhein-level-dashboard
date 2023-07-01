@@ -8,6 +8,10 @@
     text-align: center;
 }
 
+.ui-card {
+    margin: 24px 32px;
+}
+
 .ui-card-body {
     margin-block-start: 24px;
 }

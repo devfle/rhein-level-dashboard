@@ -31,6 +31,7 @@ public class RheinLevelChart implements Serializable {
         List<Object> chartValues = new ArrayList<>();
 
         List<RheinLevelData> rheinLevelData = null;
+        List<String> labels = new ArrayList<>();
 
         try {
             rheinLevelData = RheinLevelController.getRheinLevelData();
@@ -48,6 +49,7 @@ public class RheinLevelChart implements Serializable {
             }
 
             chartValues.add(rheinData.getValue());
+            labels.add(String.format("%02d:00" ,localDateTime.getHour()));
         }
 
         dataSet.setData(chartValues);
@@ -56,12 +58,6 @@ public class RheinLevelChart implements Serializable {
         dataSet.setBorderColor("rgb(75, 192, 192)");
         dataSet.setTension(0.1);
         data.addChartDataSet(dataSet);
-
-        List<String> labels = new ArrayList<>();
-
-        for (byte time = 0; time < 24; time++) {
-            labels.add(String.format("%02d:00", time));
-        }
 
         data.setLabels(labels);
 
