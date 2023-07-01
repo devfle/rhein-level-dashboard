@@ -12,6 +12,8 @@ import org.primefaces.model.charts.optionconfig.title.Title;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URISyntaxException;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,14 @@ public class RheinLevelChart implements Serializable {
         }
 
         for (RheinLevelData rheinData : rheinLevelData) {
+            String rheinLevelTimeStamp = rheinData.getTimestamp();
+            OffsetDateTime parsedTimeStamp = OffsetDateTime.parse(rheinLevelTimeStamp);
+            LocalDateTime localDateTime = parsedTimeStamp.toLocalDateTime();
+
+            if (0 != localDateTime.getMinute()) {
+                continue;
+            }
+
             chartValues.add(rheinData.getValue());
         }
 
@@ -58,7 +68,7 @@ public class RheinLevelChart implements Serializable {
         LineChartOptions options = new LineChartOptions();
         Title title = new Title();
         title.setDisplay(true);
-        title.setText("Line Chart");
+        title.setText("Rhein Level");
         options.setTitle(title);
 
         lineModel.setOptions(options);
