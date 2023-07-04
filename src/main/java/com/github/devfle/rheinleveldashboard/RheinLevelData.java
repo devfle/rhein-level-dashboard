@@ -1,13 +1,11 @@
 package com.github.devfle.rheinleveldashboard;
 
-import jakarta.faces.view.ViewScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 
-import java.io.Serializable;
-
 @Named
-@ViewScoped
-public class RheinLevelData implements Serializable {
+@RequestScoped
+public class RheinLevelData {
     private float value;
     private String timestamp;
 

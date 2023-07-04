@@ -8,10 +8,22 @@
     text-align: center;
 }
 
+.ui-menuitem-link.active .ui-menuitem-text {
+    color: #4a7dd5 !important;
+}
+
 .ui-card {
     margin: 24px 32px;
 }
 
 .ui-card-body {
     margin-block-start: 24px;
+}
+
+.ui-selectmanycheckbox {
+    margin-block-start: 12px;
+}
+
+.settings-button-wrapper {
+    margin-block-start: 32px;
 }

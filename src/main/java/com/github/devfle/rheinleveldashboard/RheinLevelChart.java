@@ -1,7 +1,7 @@
 package com.github.devfle.rheinleveldashboard;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.view.ViewScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.line.LineChartDataSet;
@@ -9,7 +9,6 @@ import org.primefaces.model.charts.line.LineChartModel;
 import org.primefaces.model.charts.line.LineChartOptions;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -17,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Named
-@ViewScoped
-public class RheinLevelChart implements Serializable {
+@RequestScoped
+public class RheinLevelChart {
     private LineChartModel lineModel;
 
     @PostConstruct

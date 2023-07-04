@@ -12,10 +12,11 @@
     </h:head>
     <h:body>
         <p:menu>
-            <p:menuitem value="Home" url="#" />
-            <p:menuitem value="Settings" url="#" />
+            <p:menuitem class="active" value="Home" url="index.xhtml" />
+            <p:menuitem value="Settings" url="settings.xhtml" />
         </p:menu>
         <p:card>
+            <p:autoUpdate/>
             <p:lineChart model="#{rheinLevelChart.lineModel}" />
         </p:card>
     </h:body>
