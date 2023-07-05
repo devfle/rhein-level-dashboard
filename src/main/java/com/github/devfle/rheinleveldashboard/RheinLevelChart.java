@@ -2,6 +2,7 @@ package com.github.devfle.rheinleveldashboard;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.line.LineChartDataSet;
@@ -20,6 +21,9 @@ import java.util.List;
 public class RheinLevelChart {
     private LineChartModel lineModel;
 
+    @Inject
+    private RheinLevel rheinLevel;
+
     @PostConstruct
     public void init() {
         lineModel = new LineChartModel();
@@ -30,7 +34,7 @@ public class RheinLevelChart {
         List<String> colorCodes = List.of("#002A40", "#00547F", "#007FBF", "#1BB8FA");
 
         try {
-            rheinLevelData = RheinLevelController.getRheinLevelData();
+            rheinLevelData = rheinLevel.retrieveRheinLevelData();
         } catch (URISyntaxException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }

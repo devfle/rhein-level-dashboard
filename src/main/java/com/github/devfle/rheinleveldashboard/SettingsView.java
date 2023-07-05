@@ -2,11 +2,10 @@ package com.github.devfle.rheinleveldashboard;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,20 +16,15 @@ public class SettingsView implements Serializable {
     private String[] selectedOptions = { "Bonn", "Dusseldorf", "Konstanz", "Mainz" };
     private List<String> stations = new ArrayList<>();
 
-    private SettingsView() {}
-
-    public static SettingsView instance = new SettingsView();
+    @Inject
+    private RheinLevel rheinLevel;
 
     @PostConstruct
     public void init() {
 
         Map<String, String> stationData;
 
-        try {
-            stationData = RheinLevelController.getApiStations();
-        } catch (URISyntaxException | IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        stationData = rheinLevel.getApiStations();
 
         for (Map.Entry<String, String> singleStationData : stationData.entrySet()) {
             stations.add(singleStationData.getKey());
