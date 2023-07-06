@@ -1,6 +1,6 @@
 # Rhein Level Dashboard
 
-The Rhine Level Dashboard is an university project and shows the current Rhine levels in different cities. The Rhine is a river that flows through Germany.
+The Rhine Level Dashboard is an university project and shows the current and past (24hrs) Rhine levels in different cities. The Rhine is a river that flows through Germany.
 
 <img width="1265" alt="02" src="https://github.com/devfle/rhein-level-dashboard/assets/52854338/4cdb5cbd-32bc-49b9-b145-7f896698895f">
 
