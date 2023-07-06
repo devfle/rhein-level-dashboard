@@ -19,11 +19,11 @@
          <h2>Rhein Level Settings</h2>
          <h:form>
             <p:outputLabel value="Allowed Stations:" />
-            <p:selectManyCheckbox id="basic" value="#{settingsView.selectedOptions}">
-               <f:selectItems value="#{settingsView.stations}" var="station" itemLabel="#{station}" itemValue="#{station}"/>
+            <p:selectManyCheckbox id="basic" value="#{settingsController.selectedOptions}">
+               <f:selectItems value="#{settingsController.stations}" var="station" itemLabel="#{station}" itemValue="#{station}"/>
             </p:selectManyCheckbox>
             <div class="settings-button-wrapper">
-               <p:commandButton class="" value="Save Changes" />
+               <p:commandButton value="Save Changes" />
             </div>
          </h:form>
       </p:card>

@@ -16,14 +16,35 @@
     margin: 24px 32px;
 }
 
-.ui-card-body {
-    margin-block-start: 24px;
-}
-
 .ui-selectmanycheckbox {
     margin-block-start: 12px;
 }
 
-.settings-button-wrapper {
+.ui-card-body {
+    margin-block-start: 24px;
+}
+
+.settings-button-wrapper,
+.filter-button-wrapper {
     margin-block-start: 32px;
+}
+
+.filter-slider-wrapper {
+    display: flex;
+    align-items: center;
+    margin-block-start: 12px;
+}
+
+.filter-slider-wrapper .ui-slider {
+    width: min(100%, 350px);
+    margin-inline-start: 16px;
+}
+
+.filter-slider-wrapper .ui-slider-input {
+    min-height: 28px;
+    border-radius: 2px;
+    box-shadow: none;
+    outline: 1px solid #333;
+    border: none;
+    padding: 8px;
 }

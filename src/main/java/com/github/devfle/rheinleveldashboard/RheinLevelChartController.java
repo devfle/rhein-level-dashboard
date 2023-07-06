@@ -18,7 +18,7 @@ import java.util.List;
 
 @Named
 @RequestScoped
-public class RheinLevelChart {
+public class RheinLevelChartController {
     private LineChartModel lineModel;
 
     @Inject

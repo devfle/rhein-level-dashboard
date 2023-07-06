@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Named
 @ApplicationScoped
-public class SettingsView implements Serializable {
+public class SettingsController implements Serializable {
     private String[] selectedOptions = { "Bonn", "Dusseldorf", "Konstanz", "Mainz" };
     private List<String> stations = new ArrayList<>();
 

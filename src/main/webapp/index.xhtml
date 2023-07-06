@@ -17,7 +17,20 @@
         </p:menu>
         <p:card>
             <p:autoUpdate/>
-            <p:lineChart model="#{rheinLevelChart.lineModel}" />
+            <p:lineChart model="#{rheinLevelChartController.lineModel}" />
+        </p:card>
+        <p:card>
+            <h2>Filter</h2>
+            <h:form>
+                <p:outputLabel>Minimal Rhein Level Value:</p:outputLabel>
+                <div class="filter-slider-wrapper">
+                    <h:inputText class="ui-slider-input" id="number" value="#{rheinLevelFilterController.filterValue}" />
+                    <p:slider for="number" step="#{rheinLevelFilterController.steps}" minValue="#{rheinLevelFilterController.minValue}" maxValue="#{rheinLevelFilterController.maxValue}" />
+                </div>
+                <div class="filter-button-wrapper">
+                    <p:commandButton value="Apply Filter" />
+                </div>
+            </h:form>
         </p:card>
     </h:body>
 </f:view>

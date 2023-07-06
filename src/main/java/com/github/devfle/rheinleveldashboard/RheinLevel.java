@@ -22,19 +22,22 @@ public class RheinLevel implements Serializable {
 
 
     @Inject
-    private SettingsView settingsView;
+    private SettingsController settingsController;
+
+    @Inject
+    private RheinLevelFilterController rheinLevelFilterController;
 
     public RheinLevel() {
-
         apiStations.put("Bonn", "593647aa-9fea-43ec-a7d6-6476a76ae868");
         apiStations.put("Dusseldorf", "8f7e5f92-1153-4f93-acba-ca48670c8ca9");
         apiStations.put("Konstanz", "e020e651-e422-46d3-ae28-34887c5a4a8e");
         apiStations.put("Mainz", "a37a9aa3-45e9-4d90-9df6-109f3a28a5af");
-
     }
 
     public List<List<RheinLevelData>> retrieveRheinLevelData() throws URISyntaxException, IOException, InterruptedException {
-        String[] stationSettings = settingsView.getSelectedOptions();
+        String[] stationSettings = settingsController.getSelectedOptions();
+        short minRheinLevel = rheinLevelFilterController.getFilterValue();
+
         List<List<RheinLevelData>> rheinLevel = new ArrayList<>();
 
         for (Map.Entry<String, String> apiEntry : apiStations.entrySet()) {
@@ -59,18 +62,23 @@ public class RheinLevel implements Serializable {
                 levelData.setStationName(apiEntry.getKey());
             }
 
-            rheinLevel.add(singleLevelData);
+            for (RheinLevelData levelData : singleLevelData) {
+                if (levelData.getValue() >= minRheinLevel) {
+                    rheinLevel.add(singleLevelData);
+                    break;
+                }
+            }
         }
 
         return rheinLevel;
     }
 
-    public void setSettingsView(SettingsView settingsView) {
-        this.settingsView = settingsView;
+    public void setSettingsView(SettingsController settingsView) {
+        this.settingsController = settingsView;
     }
 
-    public SettingsView getSettingsView() {
-        return settingsView;
+    public SettingsController getSettingsView() {
+        return settingsController;
     }
 
     public Map<String, String> getApiStations() {
