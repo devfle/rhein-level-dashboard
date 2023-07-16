@@ -9,9 +9,9 @@ import java.io.Serializable;
 @SessionScoped
 public class RheinLevelFilterController implements Serializable {
     private short filterValue = 100;
-    private byte minValue = 100;
-    private short maxValue = 400;
-    private byte steps = 20;
+    private final byte minValue = 100;
+    private final short maxValue = 400;
+    private final byte steps = 20;
 
     public short getFilterValue() {
         return filterValue;
@@ -25,23 +25,11 @@ public class RheinLevelFilterController implements Serializable {
         return minValue;
     }
 
-    public void setMinValue(byte minValue) {
-        this.minValue = minValue;
-    }
-
     public short getMaxValue() {
         return maxValue;
     }
 
-    public void setMaxValue(short maxValue) {
-        this.maxValue = maxValue;
-    }
-
     public byte getSteps() {
         return steps;
-    }
-
-    public void setSteps(byte steps) {
-        this.steps = steps;
     }
 }
