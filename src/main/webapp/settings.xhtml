@@ -12,8 +12,8 @@
    </h:head>
    <h:body>
       <p:menu>
-         <p:menuitem value="Home" url="index.xhtml" />
-         <p:menuitem class="active" value="Settings" url="settings.xhtml" />
+         <p:menuitem value="Home" url="#{navigationController.dashboardEndpoint}" />
+         <p:menuitem class="active" value="Settings" url="#{navigationController.settingsEndpoint}" />
       </p:menu>
       <p:card>
          <h2>Rhein Level Settings</h2>

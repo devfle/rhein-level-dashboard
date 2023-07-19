@@ -12,8 +12,8 @@
     </h:head>
     <h:body>
         <p:menu>
-            <p:menuitem class="active" value="Home" url="index.xhtml" />
-            <p:menuitem value="Settings" url="settings.xhtml" />
+            <p:menuitem class="active" value="Home" url="#{navigationController.dashboardEndpoint}" />
+            <p:menuitem value="Settings" url="#{navigationController.settingsEndpoint}" />
         </p:menu>
         <p:card>
             <p:autoUpdate/>
